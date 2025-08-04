@@ -36,6 +36,7 @@ WORKDIR /app
 
 # Copy application code
 COPY app.py .
+COPY gunicorn.conf.py .
 
 # Optimize Python for performance
 ENV PYTHONOPTIMIZE=1
@@ -49,5 +50,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import requests; requests.get('http://localhost:8000/health')" || exit 1
 
-# Run the application
-CMD ["python", "app.py"] 
+# Run the application with Gunicorn
+CMD ["gunicorn", "app:app", "-c", "gunicorn.conf.py"] 

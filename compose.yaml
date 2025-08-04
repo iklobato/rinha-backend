@@ -17,6 +17,8 @@ services:
       - PYTHONOPTIMIZE=1
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+      - GUNICORN_WORKERS=1
+      - GUNICORN_WORKER_CONNECTIONS=50
     deploy:
       resources:
         limits:
